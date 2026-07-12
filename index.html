@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Muhammetgulyyev Dayanch — Android Developer building mobile and Android TV apps with Kotlin, Jetpack Compose, Leanback, and Media3.">
+<meta name="author" content="Muhammetgulyyev Dayanch">
+<meta property="og:title" content="Muhammetgulyyev Dayanch — Android Developer">
+<meta property="og:description" content="Android developer building production apps for mobile and Android TV with clean, multi-module Kotlin.">
+<meta property="og:type" content="website">
+<title>Dayanch Muhammetgulyyev — Android Developer</title>
+<style>
+  :root {
+    --bg: #F5F8F6;
+    --surface: #FFFFFF;
+    --surface-2: #EEF3F0;
+    --line: #DBE4DF;
+    --text: #12211B;
+    --muted: #5C6E66;
+    --faint: #8A9992;
+    --accent: #0E9D6B;
+    --accent-soft: #DBF3E9;
+    --amber: #C77A22;
+    --ink: #0B1712;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --maxw: 1080px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0C130F;
+      --surface: #121C17;
+      --surface-2: #17231C;
+      --line: #24352C;
+      --text: #E7EEE9;
+      --muted: #9BAEA4;
+      --faint: #6E8177;
+      --accent: #35D89A;
+      --accent-soft: #123128;
+      --amber: #E7A75C;
+      --ink: #05100B;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #F5F8F6; --surface: #FFFFFF; --surface-2: #EEF3F0; --line: #DBE4DF;
+    --text: #12211B; --muted: #5C6E66; --faint: #8A9992; --accent: #0E9D6B;
+    --accent-soft: #DBF3E9; --amber: #C77A22; --ink: #0B1712;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0C130F; --surface: #121C17; --surface-2: #17231C; --line: #24352C;
+    --text: #E7EEE9; --muted: #9BAEA4; --faint: #6E8177; --accent: #35D89A;
+    --accent-soft: #123128; --amber: #E7A75C; --ink: #05100B;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ""; width: 26px; height: 1px; background: var(--accent); opacity: .55;
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    position: relative;
+    padding: clamp(64px, 12vw, 128px) 0 clamp(48px, 8vw, 84px);
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 70% 15%, #000 0%, transparent 72%);
+    mask-image: radial-gradient(ellipse 80% 60% at 70% 15%, #000 0%, transparent 72%);
+    opacity: .5;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; }
+  .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 100px;
+    padding: 6px 13px; background: var(--surface); margin-bottom: 26px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  h1 {
+    font-size: clamp(38px, 7.2vw, 78px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    margin: 0 0 20px;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+  h1 .grad { color: var(--accent); }
+  .lede {
+    font-size: clamp(17px, 2.1vw, 21px);
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 0 34px;
+  }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    padding-top: 26px; border-top: 1px solid var(--line);
+  }
+  .meta a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .18s, color .18s; }
+  .meta a:hover { color: var(--accent); border-color: var(--accent); }
+  .meta span::before { content: "› "; color: var(--accent); }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(46px, 7vw, 82px) 0; border-top: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+  h2 { font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -0.02em; margin: 0; font-weight: 750; }
+  .sec-index { font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: .1em; }
+
+  .about-body { font-size: clamp(17px, 2vw, 20px); max-width: 62ch; color: var(--text); }
+  .about-body p { margin: 0 0 18px; }
+  .about-body strong { color: var(--accent); font-weight: 650; }
+
+  /* ---------- Experience timeline ---------- */
+  .xp { display: flex; flex-direction: column; gap: 0; }
+  .job {
+    display: grid; grid-template-columns: 200px 1fr; gap: 28px;
+    padding: 30px 0; border-top: 1px solid var(--line);
+  }
+  .job:first-child { border-top: none; }
+  .job-when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+  .job-when .now { color: var(--accent); }
+  .job h3 { margin: 0 0 4px; font-size: 20px; letter-spacing: -0.01em; }
+  .job .co { color: var(--amber); font-family: var(--mono); font-size: 13.5px; margin-bottom: 14px; display: block; }
+  .job ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .job li { position: relative; padding-left: 22px; color: var(--muted); }
+  .job li::before {
+    content: ""; position: absolute; left: 2px; top: 10px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .job li strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- Skills ---------- */
+  .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .skill-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px;
+  }
+  .skill-card h4 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 16px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 13.5px; padding: 6px 12px; border-radius: 8px;
+    background: var(--surface-2); border: 1px solid var(--line); color: var(--text);
+  }
+  .chip.key { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
+
+  /* ---------- Projects ---------- */
+  .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .proj {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 26px; position: relative; overflow: hidden;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .proj:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .proj::after {
+    content: ""; position: absolute; top: 0; right: 0; width: 120px; height: 120px;
+    background: radial-gradient(circle at 100% 0, var(--accent-soft), transparent 70%);
+    pointer-events: none;
+  }
+  .proj .platforms { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .proj h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -0.02em; }
+  .proj p { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+  .proj .stack { display: flex; flex-wrap: wrap; gap: 7px; }
+  .proj .stack span { font-family: var(--mono); font-size: 11.5px; color: var(--faint); background: var(--surface-2); padding: 4px 9px; border-radius: 6px; }
+
+  /* ---------- Bottom grid: education + languages ---------- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .edu-item { border-left: 2px solid var(--accent); padding-left: 18px; }
+  .edu-item .yr { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .edu-item h3 { margin: 6px 0 4px; font-size: 18px; }
+  .edu-item .deg { color: var(--muted); font-size: 15px; }
+
+  .lang { display: flex; flex-direction: column; gap: 18px; }
+  .lang-row .lang-top { display: flex; justify-content: space-between; margin-bottom: 7px; font-size: 15px; }
+  .lang-row .lang-top .lvl { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .bar { height: 6px; background: var(--surface-2); border-radius: 100px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 100px; }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 56px 0 72px; }
+  .foot-cta { font-size: clamp(24px, 4vw, 38px); font-weight: 750; letter-spacing: -0.02em; margin: 0 0 24px; max-width: 20ch; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    font-family: var(--mono); font-size: 13.5px; text-decoration: none;
+    padding: 11px 18px; border-radius: 10px; border: 1px solid var(--line);
+    color: var(--text); transition: all .18s ease; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.08); color: var(--ink); }
+  .copyright { margin-top: 44px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+  @media (max-width: 680px) {
+    .job { grid-template-columns: 1fr; gap: 10px; }
+    .two-col { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="wrap hero-inner">
+    <span class="status"><span class="dot"></span> Available for Android work · Ashgabat, TM</span>
+    <h1>Muhammetgulyyev Dayanch<br><span class="grad">Android Developer.</span></h1>
+    <p class="lede">I build production Android apps for both the phone and the living room — architecting mobile and TV clients from the ground up with clean, multi-module Kotlin.</p>
+    <div class="meta">
+      <span>Ashgabat, Turkmenistan</span>
+      <a href="mailto:freelanceworkmail777@gmail.com">freelanceworkmail777@gmail.com</a>
+      <a href="https://github.com/parzivalbck" target="_blank" rel="noopener">github.com/parzivalbck</a>
+      <a href="https://www.linkedin.com/in/dayanch-muhammetgulyyev-bb7b12308/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <div class="about-body">
+        <p>I'm an Android developer from Ashgabat who ships full products, not just screens. Over the last three years I've taken apps from an empty module to release on both <strong>mobile and Android TV</strong> — owning the architecture, the streaming layer, and the UI on each form factor.</p>
+        <p>My default is <strong>clean, multi-module architecture</strong>: a shared Kotlin domain layer feeding platform-specific UI, so the same business logic powers a Compose phone app and a Leanback TV experience. I care about the details that users never see but always feel — smooth paging, resilient media playback, and state that behaves.</p>
+        <p>I work comfortably across the modern Jetpack stack and enjoy the harder problems: media streaming with Media3/ExoPlayer, offline-first data with Room, and dependency graphs that stay sane as a codebase grows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Experience</h2>
+        <span class="sec-index">01 — work</span>
+      </div>
+      <div class="xp">
+        <div class="job">
+          <div class="job-when">2023 — <span class="now">Present</span></div>
+          <div>
+            <h3>Android Developer</h3>
+            <span class="co">Kamil Ulgam</span>
+            <ul>
+              <li>Designed and built the company's <strong>mobile and Android TV apps end to end</strong>, owning the full architecture across both form factors.</li>
+              <li>Established a <strong>multi-module clean architecture</strong> with a shared domain layer, so business logic is reused across phone and TV clients.</li>
+              <li>Implemented <strong>media streaming with Media3/ExoPlayer</strong> (HLS), paginated content feeds, and offline-capable data with Room.</li>
+              <li>Built the phone UI in <strong>Jetpack Compose</strong> and the TV experience with <strong>Leanback</strong>, wired together with Hilt and Navigation.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="job-when">2026 · 5 months</div>
+          <div>
+            <h3>Android Developer <span style="color:var(--faint);font-weight:400;font-size:15px;">— Freelance</span></h3>
+            <span class="co">Berk Technology</span>
+            <ul>
+              <li>Delivered Android development on a <strong>5-month freelance engagement</strong>, contributing production features to the client's app.</li>
+              <li>Worked to modern Android standards — Kotlin, Jetpack, and a maintainable modular structure.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Tech Stack</h2>
+        <span class="sec-index">02 — tools</span>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-card">
+          <h4>Languages &amp; Core</h4>
+          <div class="chips">
+            <span class="chip key">Kotlin</span>
+            <span class="chip">Coroutines</span>
+            <span class="chip">Flow</span>
+            <span class="chip">kotlinx.serialization</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>UI</h4>
+          <div class="chips">
+            <span class="chip key">Jetpack Compose</span>
+            <span class="chip key">Leanback (TV)</span>
+            <span class="chip">Views / XML</span>
+            <span class="chip">Navigation</span>
+            <span class="chip">Coil</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Architecture &amp; DI</h4>
+          <div class="chips">
+            <span class="chip key">Clean Architecture</span>
+            <span class="chip">Multi-module</span>
+            <span class="chip">Hilt / Dagger</span>
+            <span class="chip">MVVM</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Data &amp; Networking</h4>
+          <div class="chips">
+            <span class="chip">Retrofit</span>
+            <span class="chip">Ktor</span>
+            <span class="chip">Room</span>
+            <span class="chip">Paging 3</span>
+            <span class="chip">DataStore</span>
+            <span class="chip">Google Auth</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Media</h4>
+          <div class="chips">
+            <span class="chip key">Media3 / ExoPlayer</span>
+            <span class="chip">HLS Streaming</span>
+            <span class="chip">MediaSession</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h4>Workflow</h4>
+          <div class="chips">
+            <span class="chip">Git</span>
+            <span class="chip">Gradle (KTS)</span>
+            <span class="chip">Version Catalogs</span>
+            <span class="chip">Android Studio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Selected Projects</h2>
+        <span class="sec-index">03 — work</span>
+      </div>
+      <div class="projects">
+        <div class="proj">
+          <div class="platforms">Mobile · Android TV</div>
+          <h3>Horjun</h3>
+          <p>A media streaming platform I architected and built for both phones and television — shared domain logic, a Compose phone UI, a Leanback TV interface, and a full music feature with paginated feeds, playlists, and a background player.</p>
+          <div class="stack">
+            <span>Kotlin</span><span>Compose</span><span>Leanback</span><span>Media3</span><span>Paging 3</span><span>Hilt</span><span>Room</span>
+          </div>
+        </div>
+        <div class="proj">
+          <div class="platforms">Mobile</div>
+          <h3>Adim</h3>
+          <p>An Android mobile application built end to end with a modern Jetpack stack and a clean, modular structure for maintainable, testable feature development.</p>
+          <div class="stack">
+            <span>Kotlin</span><span>Jetpack</span><span>Retrofit</span><span>MVVM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="wrap">
+      <div class="two-col">
+        <div>
+          <div class="sec-head" style="margin-bottom:28px;"><h2>Education</h2></div>
+          <div class="edu-item">
+            <div class="yr">2022 — 2026</div>
+            <h3>B.Sc. Information Technology &amp; Cybersecurity</h3>
+            <div class="deg">Institute of Engineering, Technical and Transport Communications of Turkmenistan</div>
+          </div>
+        </div>
+        <div>
+          <div class="sec-head" style="margin-bottom:28px;"><h2>Languages</h2></div>
+          <div class="lang">
+            <div class="lang-row">
+              <div class="lang-top"><span>Turkmen</span><span class="lvl">Native</span></div>
+              <div class="bar"><i style="width:100%"></i></div>
+            </div>
+            <div class="lang-row">
+              <div class="lang-top"><span>Russian</span><span class="lvl">Fluent · 100%</span></div>
+              <div class="bar"><i style="width:100%"></i></div>
+            </div>
+            <div class="lang-row">
+              <div class="lang-top"><span>English</span><span class="lvl">Professional · 75%</span></div>
+              <div class="bar"><i style="width:75%"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="foot-cta">Let's build something that ships.</p>
+    <div class="foot-links">
+      <a class="btn primary" href="mailto:freelanceworkmail777@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/parzivalbck" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://www.linkedin.com/in/dayanch-muhammetgulyyev-bb7b12308/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <p class="copyright">© 2026 Muhammetgulyyev Dayanch · Ashgabat, Turkmenistan · Built with Kotlin in mind.</p>
+  </div>
+</footer>
+
+</body>
+</html>
