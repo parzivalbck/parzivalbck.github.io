@@ -66,6 +66,17 @@
   }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
 
+  /* ---------- Navigation ---------- */
+  .site-nav { position: absolute; inset: 0 0 auto; z-index: 2; padding-top: 22px; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .brand { color: var(--text); font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: -.04em; text-decoration: none; }
+  .brand b { color: var(--accent); font-weight: inherit; }
+  .nav-links { display: flex; align-items: center; gap: 20px; }
+  .nav-links a { color: var(--muted); font-family: var(--mono); font-size: 12px; text-decoration: none; transition: color .18s ease; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links .nav-cta { padding: 7px 11px; color: var(--text); border: 1px solid var(--line); border-radius: 7px; }
+  .nav-links .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
   .eyebrow {
     font-family: var(--mono);
     font-size: 12px;
@@ -128,6 +139,10 @@
   .meta a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .18s, color .18s; }
   .meta a:hover { color: var(--accent); border-color: var(--accent); }
   .meta span::before { content: "› "; color: var(--accent); }
+  .hero-proof { display: flex; flex-wrap: wrap; gap: 1px; margin-top: 42px; max-width: 720px; background: var(--line); border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+  .proof-item { flex: 1 1 150px; min-width: 150px; padding: 15px 19px; background: var(--surface); }
+  .proof-value { display: block; font-family: var(--mono); color: var(--accent); font-size: 18px; font-weight: 700; }
+  .proof-label { display: block; margin-top: 2px; font-size: 12px; color: var(--muted); }
 
   /* ---------- Sections ---------- */
   section { padding: clamp(46px, 7vw, 82px) 0; border-top: 1px solid var(--line); }
@@ -157,6 +172,9 @@
     width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
   }
   .job li strong { color: var(--text); font-weight: 600; }
+  .job-mark { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin-bottom: 11px; background: var(--accent-soft); border-radius: 8px; color: var(--accent); font-family: var(--mono); font-size: 12px; font-weight: 800; }
+  .job-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+  .job-tags span { border: 1px solid var(--line); border-radius: 100px; color: var(--faint); font-family: var(--mono); font-size: 11px; padding: 3px 9px; }
 
   /* ---------- Skills ---------- */
   .skill-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
@@ -222,6 +240,8 @@
   .copyright { margin-top: 44px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
 
   @media (max-width: 680px) {
+    .site-nav { padding-top: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
     .job { grid-template-columns: 1fr; gap: 10px; }
     .two-col { grid-template-columns: 1fr; gap: 40px; }
   }
@@ -229,8 +249,18 @@
 </head>
 <body>
 <header class="hero">
+  <nav class="site-nav" aria-label="Main navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">dayanch<b>.dev</b></a>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a class="nav-cta" href="mailto:freelanceworkmail777@gmail.com">Let’s talk ↗</a>
+      </div>
+    </div>
+  </nav>
   <div class="hero-grid"></div>
-  <div class="wrap hero-inner">
+  <div class="wrap hero-inner" id="top">
     <span class="status"><span class="dot"></span> Available for Android work · Ashgabat, TM</span>
     <h1>Muhammetgulyyev Dayanch<br><span class="grad">Android Developer.</span></h1>
     <p class="lede">I build production Android apps for both the phone and the living room — architecting mobile and TV clients from the ground up with clean, multi-module Kotlin.</p>
@@ -239,6 +269,11 @@
       <a href="mailto:freelanceworkmail777@gmail.com">freelanceworkmail777@gmail.com</a>
       <a href="https://github.com/parzivalbck" target="_blank" rel="noopener">github.com/parzivalbck</a>
       <a href="https://www.linkedin.com/in/dayanch-muhammetgulyyev-bb7b12308/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="hero-proof" aria-label="Career highlights">
+      <div class="proof-item"><span class="proof-value">3+ years</span><span class="proof-label">shipping Android products</span></div>
+      <div class="proof-item"><span class="proof-value">Mobile + TV</span><span class="proof-label">one product, two experiences</span></div>
+      <div class="proof-item"><span class="proof-value">Kotlin-first</span><span class="proof-label">from architecture to release</span></div>
     </div>
   </div>
 </header>
@@ -265,6 +300,7 @@
         <div class="job">
           <div class="job-when">2023 — <span class="now">Present</span></div>
           <div>
+            <span class="job-mark" aria-hidden="true">KU</span>
             <h3>Android Developer</h3>
             <span class="co">Kamil Ulgam</span>
             <ul>
@@ -273,17 +309,20 @@
               <li>Implemented <strong>media streaming with Media3/ExoPlayer</strong> (HLS), paginated content feeds, and offline-capable data with Room.</li>
               <li>Built the phone UI in <strong>Jetpack Compose</strong> and the TV experience with <strong>Leanback</strong>, wired together with Hilt and Navigation.</li>
             </ul>
+            <div class="job-tags"><span>Android TV</span><span>Media streaming</span><span>Product architecture</span></div>
           </div>
         </div>
         <div class="job">
           <div class="job-when">2026 · 5 months</div>
           <div>
+            <span class="job-mark" aria-hidden="true">BT</span>
             <h3>Android Developer <span style="color:var(--faint);font-weight:400;font-size:15px;">— Freelance</span></h3>
             <span class="co">Berk Technology</span>
             <ul>
               <li>Delivered Android development on a <strong>5-month freelance engagement</strong>, contributing production features to the client's app.</li>
               <li>Worked to modern Android standards — Kotlin, Jetpack, and a maintainable modular structure.</li>
             </ul>
+            <div class="job-tags"><span>Freelance</span><span>Kotlin</span><span>Jetpack</span></div>
           </div>
         </div>
       </div>
